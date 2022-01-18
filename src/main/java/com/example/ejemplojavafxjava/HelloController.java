@@ -1,7 +1,5 @@
 package com.example.ejemplojavafxjava;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,7 +14,7 @@ public class HelloController {
     private Label welcomeText;
 
     private int contadorDePulsaciones = 0;
-    private Ventana2Controller v = null;
+    private Ventana2Controller controllerVentana2 = null;
     private Stage stage = null;
     @FXML
     protected void onHelloButtonClick() {
@@ -31,15 +29,20 @@ public class HelloController {
                 stage.setScene(scene);
                 stage.show();
 
-                v = loader.getController();
+                controllerVentana2 = loader.getController();
             }
 
             contadorDePulsaciones++;
-            v.funcionPublica(contadorDePulsaciones);
+            controllerVentana2.funcionPublica(contadorDePulsaciones);
+            controllerVentana2.enviarController1(this);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
         welcomeText.setText("Welcome to JavaFX Application!");
+    }
+
+    public void actualizarNumeroDeClick(int pulsaciones) {
+        welcomeText.setText("Se ha pulsado " + pulsaciones + " veces");
     }
 }
